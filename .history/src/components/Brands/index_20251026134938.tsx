@@ -35,18 +35,7 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
         href={href}
         className="relative h-10 w-full opacity-70 transition hover:opacity-100 dark:opacity-60 dark:hover:opacity-100 flex items-center justify-center"
       >
-        <Image
-          src={imageLight}
-          alt={name}
-          fill
-          className="hidden dark:block"
-        />
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className="block dark:hidden"
-        />
+        <span className="text-sm font-medium text-dark dark:text-white text-center">{name}</span>
       </a>
     </div>
   );

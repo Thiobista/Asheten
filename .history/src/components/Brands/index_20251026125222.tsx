@@ -10,8 +10,8 @@ const Brands = () => {
           <div className="w-full px-4">
             <div className="flex flex-wrap items-center justify-center rounded-xs bg-gray-light px-8 py-8 dark:bg-gray-dark sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
               <div className="w-full text-center mb-6">
-                <h3 className="text-xl font-semibold text-dark dark:text-white mb-2">Our Partners</h3>
-                <p className="text-body-color dark:text-body-color-dark">We proudly collaborate with national and international organizations that share our vision for growth and excellence</p>
+                <h3 className="text-xl font-semibold text-dark dark:text-white mb-2">Our Business Sectors</h3>
+                <p className="text-body-color dark:text-body-color-dark">Comprehensive services across multiple industries</p>
               </div>
               {brandsData.map((brand) => (
                 <SingleBrand key={brand.id} brand={brand} />
@@ -35,18 +35,7 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
         href={href}
         className="relative h-10 w-full opacity-70 transition hover:opacity-100 dark:opacity-60 dark:hover:opacity-100 flex items-center justify-center"
       >
-        <Image
-          src={imageLight}
-          alt={name}
-          fill
-          className="hidden dark:block"
-        />
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className="block dark:hidden"
-        />
+        <span className="text-sm font-medium text-dark dark:text-white text-center">{name}</span>
       </a>
     </div>
   );
