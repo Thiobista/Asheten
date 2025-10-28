@@ -4,14 +4,14 @@ import brandsData from "./brandsData";
 
 const Brands = () => {
   return (
-    <section className="pt-16">
+    <section className="pt-16 bg-[#0f3b3e] text-white">
       <div className="container">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="flex flex-wrap items-center justify-center rounded-xs bg-gray-light px-8 py-8 dark:bg-gray-dark sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
+            <div className="flex flex-wrap items-center justify-center rounded-xs bg-[#124448] px-8 py-8 sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
               <div className="w-full text-center mb-6">
-                <h3 className="text-xl font-semibold text-dark dark:text-white mb-2">Our Partners</h3>
-                <p className="text-body-color dark:text-body-color-dark">We proudly collaborate with national and international organizations that share our vision for growth and excellence</p>
+                <h3 className="text-xl font-semibold text-white mb-2">Our Partners</h3>
+                <p className="text-[#cfd8dc]">We proudly collaborate with national and international organizations that share our vision for growth and excellence</p>
               </div>
               {brandsData.map((brand) => (
                 <SingleBrand key={brand.id} brand={brand} />
