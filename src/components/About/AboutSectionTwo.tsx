@@ -33,11 +33,11 @@ const AboutSectionTwo = () => {
           </div>
           <div className="w-full px-4 lg:w-1/2">
             <div className="relative mx-auto mb-12 aspect-25/24 max-w-[500px] text-center lg:m-0">
-              <div className="bg-primary/10 rounded-lg p-8 h-full flex items-center justify-center">
+              <div className="bg-[#124448] rounded-lg p-8 h-full flex items-center justify-center text-white">
                 <div className="text-center">
-                  <div className="text-6xl font-bold text-primary mb-4">15+</div>
-                  <div className="text-xl font-semibold text-dark dark:text-white mb-2">Years Experience</div>
-                  <div className="text-body-color dark:text-body-color-dark">Serving Ethiopian businesses with excellence</div>
+                  <div className="text-6xl font-bold text-[#d4af37] mb-4">2+</div>
+                  <div className="text-xl font-semibold text-white mb-2">Years Experience</div>
+                  <div className="text-white/80">Serving Ethiopian businesses with excellence</div>
                 </div>
               </div>
             </div>
