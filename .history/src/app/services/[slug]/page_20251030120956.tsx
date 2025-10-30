@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   return featuresData.map((f) => ({ slug: f.slug }));
 }
 
-export async function generateMetadata({ params }: any): Promise<Metadata>  {
+export async function generateMetadata({ params }): Promise<Metadata> {
   const service = featuresData.find((f) => f.slug === params.slug);
   if (!service) return { title: "Service not found" };
   return {

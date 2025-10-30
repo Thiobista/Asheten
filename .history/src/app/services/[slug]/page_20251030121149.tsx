@@ -8,19 +8,13 @@ export async function generateStaticParams() {
   return featuresData.map((f) => ({ slug: f.slug }));
 }
 
-export async function generateMetadata({ params }: any): Promise<Metadata>  {
-  const service = featuresData.find((f) => f.slug === params.slug);
-  if (!service) return { title: "Service not found" };
+export async function generateMetadata({ params }: any): Promise<Metadata>  Promise<Metadata> {
   return {
-    title: `${service.title} | Services`,
-    description: service.paragraph,
+    title: "Service Details",
+    description: "Service details page",
   };
 }
-
-export default function ServiceDetailsPage({ params }: any) {
-  const service = featuresData.find((f) => f.slug === params.slug);
-  if (!service) return notFound();
-
+export default function ServiceDetailsPage() {
   return (
     <section className="py-16 md:py-20 lg:py-28">
       <div className="container">
