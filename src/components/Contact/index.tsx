@@ -9,12 +9,37 @@ const Contact = () => {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    
+    if (value && !validateEmail(value)) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError(null);
+    }
+  };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    
+    // Validate email before submission
+    if (email && !validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+    
     setSubmitting(true);
     setSuccess(null);
     setError(null);
+    setEmailError(null);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -29,6 +54,7 @@ const Contact = () => {
       setName("");
       setEmail("");
       setMessage("");
+      setEmailError(null);
     } catch (err: any) {
       setError(err?.message || "Something went wrong. Please try again.");
     } finally {
@@ -87,11 +113,21 @@ const Contact = () => {
                         id="email"
                         name="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
+                        onBlur={(e) => {
+                          if (e.target.value && !validateEmail(e.target.value)) {
+                            setEmailError("Please enter a valid email address");
+                          }
+                        }}
                         required
                         placeholder="Enter your email"
-                        className="border-stroke w-full rounded-xs border border-transparent bg-[#0f3b3e] px-6 py-3 text-base text-white placeholder:text-white/60 outline-hidden focus:border-[#d4af37]"
+                        className={`border-stroke w-full rounded-xs border border-transparent bg-[#0f3b3e] px-6 py-3 text-base text-white placeholder:text-white/60 outline-hidden focus:border-[#d4af37] ${
+                          emailError ? "border-red-500" : ""
+                        }`}
                       />
+                      {emailError && (
+                        <p className="mt-2 text-sm text-red-400">{emailError}</p>
+                      )}
                     </div>
                   </div>
                   <div className="w-full px-4">
