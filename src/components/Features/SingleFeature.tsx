@@ -1,8 +1,11 @@
+"use client";
 import { Feature } from "@/types/feature";
 import Link from "next/link";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const SingleFeature = ({ feature }: { feature: Feature }) => {
   const { icon, title, paragraph, slug } = feature;
+  const { t } = useLanguage();
   return (
     <div className="w-full">
       <Link href={`/services/${slug}`} className="block group">
@@ -11,10 +14,10 @@ const SingleFeature = ({ feature }: { feature: Feature }) => {
             {icon}
           </div>
           <h3 className="mb-5 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl dark:text-white group-hover:text-primary">
-            {title}
+            {t(title)}
           </h3>
           <p className="text-body-color pr-[10px] text-base leading-relaxed font-medium">
-            {paragraph}
+            {t(paragraph)}
           </p>
         </div>
       </Link>

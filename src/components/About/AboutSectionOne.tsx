@@ -1,4 +1,7 @@
+"use client";
+
 import SectionTitle from "../Common/SectionTitle";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const checkIcon = (
   <svg width="16" height="13" viewBox="0 0 16 13" className="fill-current">
@@ -7,12 +10,14 @@ const checkIcon = (
 );
 
 const AboutSectionOne = () => {
+  const { t } = useLanguage();
+
   const List = ({ text }) => (
     <p className="text-body-color mb-5 flex items-center text-lg font-medium">
       <span className="bg-primary/10 text-primary mr-4 flex h-[30px] w-[30px] items-center justify-center rounded-md">
         {checkIcon}
       </span>
-      {text}
+      {t(text)}
     </p>
   );
 
@@ -23,11 +28,24 @@ const AboutSectionOne = () => {
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4">
               <SectionTitle
-                title="About ASHETEN INVESTMENT ONE MEMBER PLC"
-                paragraph="Based in Addis Ababa, Ethiopia, ASHETEN INVESTMENT ONE MEMBER PLC is a diversified business entity committed to delivering excellence across multiple sectors. We pride ourselves on providing comprehensive solutions that drive growth and success for our clients."
+                title={t("About ASHETEN INVESTMENT ONE MEMBER PLC")}
                 mb="44px"
                 center
               />
+              
+              <div className="mx-auto max-w-4xl">
+                <div className="text-left">
+                  <p className="mb-5 indent-6 text-base leading-relaxed text-body-color md:text-lg md:leading-loose">
+                    {t("About_Intro_1_Prefix")} <span className="font-semibold">{t("Addis Ababa, Ethiopia")}</span>, {t("About_Intro_1_Suffix")}
+                    {t("About_Intro_2")} <span className="font-semibold">{t("comprehensive, end-to-end solutions")}</span> {t("About_Intro_3")}
+                  </p>
+                  <p className="mb-5 indent-6 text-base leading-relaxed text-body-color md:text-lg md:leading-loose">
+                    {t("Our approach blends")} <span className="text-primary font-semibold">{t("professionalism")}</span>,
+                    <span className="text-primary font-semibold"> {t("reliability")}</span>, {t("and a")}
+                    <span className="text-primary font-semibold"> {t("long-term partnership mindset")}</span> {t("to create meaningful impact for our clients.")}
+                  </p>
+                </div>
+              </div>
 
               <div className="mx-auto max-w-[800px] text-center">
                 <div className="mx-[-12px] flex flex-wrap justify-center">

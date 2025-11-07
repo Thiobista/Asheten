@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
   return (
     <>
       <section
@@ -15,23 +19,23 @@ const Hero = () => {
                   ASHETEN INVESTMENT ONE MEMBER PLC
                 </h1>
                 <p className="mb-12 text-base leading-relaxed! text-[#cfd8dc] sm:text-lg md:text-xl">
-                  Your trusted partner for comprehensive business solutions in Ethiopia. 
-                  We specialize in Tour & Travel (inbound and outbound), Import & Export, 
-                  Wholesale & Retail Trade, Repair Services, and Hotel & Restaurant services 
-                  based in Addis Ababa.
+                  {t("Hero_Intro_1")} 
+                  {t("Hero_Intro_2")} 
+                  {t("Hero_Intro_3")} 
+                  {t("Hero_Intro_4")}
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
                     href="#services"
                     className="rounded-xs bg-[#d4af37] px-8 py-4 text-base font-semibold text-black duration-300 ease-in-out hover:bg-[#c7a330]"
                   >
-                    Our Services
+                    {t("Our Services")}
                   </Link>
                   <Link
                     href="#contact"
                     className="inline-block rounded-xs bg-white/10 px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg:white/20"
                   >
-                    Contact Us
+                    {t("Contact Us")}
                   </Link>
                 </div>
               </div>

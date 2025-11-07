@@ -1,4 +1,8 @@
+"use client";
+import { useLanguage } from "../../contexts/LanguageContext";
+
 const AboutSectionTwo = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-16 md:py-20 lg:py-28">
       <div className="container">
@@ -7,26 +11,26 @@ const AboutSectionTwo = () => {
             <div className="max-w-[470px]">
               <div className="mb-9">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Ethiopian Market Expertise
+                  {t("Ethiopian Market Expertise")}
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  With deep understanding of the Ethiopian business landscape, we provide tailored solutions that align with local market dynamics and regulatory requirements.
+                  {t("About2_Paragraph_1")}
                 </p>
               </div>
               <div className="mb-9">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Comprehensive Service Portfolio
+                  {t("Comprehensive Service Portfolio")}
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  Our diversified business model allows us to serve clients across multiple sectors, providing integrated solutions under one roof.
+                  {t("About2_Paragraph_2")}
                 </p>
               </div>
               <div className="mb-1">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Professional Excellence
+                  {t("Professional Excellence")}
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  We maintain the highest standards of professionalism and quality in all our services, ensuring client satisfaction and long-term partnerships.
+                  {t("About2_Paragraph_3")}
                 </p>
               </div>
             </div>
@@ -36,8 +40,8 @@ const AboutSectionTwo = () => {
               <div className="bg-[#124448] rounded-lg p-8 h-full flex items-center justify-center text-white">
                 <div className="text-center">
                   <div className="text-6xl font-bold text-[#d4af37] mb-4">2+</div>
-                  <div className="text-xl font-semibold text-white mb-2">Years Experience</div>
-                  <div className="text-white/80">Serving Ethiopian businesses with excellence</div>
+                  <div className="text-xl font-semibold text-white mb-2">{t("Years Experience")}</div>
+                  <div className="text-white/80">{t("Serving Ethiopian businesses with excellence")}</div>
                 </div>
               </div>
             </div>

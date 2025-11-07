@@ -1,8 +1,10 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
+  const { t } = useLanguage();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -21,7 +23,7 @@ const Contact = () => {
     setEmail(value);
     
     if (value && !validateEmail(value)) {
-      setEmailError("Please enter a valid email address");
+      setEmailError(t("Please enter a valid email address"));
     } else {
       setEmailError(null);
     }
@@ -32,7 +34,7 @@ const Contact = () => {
     
     // Validate email before submission
     if (email && !validateEmail(email)) {
-      setEmailError("Please enter a valid email address");
+      setEmailError(t("Please enter a valid email address"));
       return;
     }
     
@@ -48,15 +50,15 @@ const Contact = () => {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || "Failed to send message");
+        throw new Error(data?.error || t("Failed to send message"));
       }
-      setSuccess("Thanks! Your message has been sent.");
+      setSuccess(t("Thanks! Your message has been sent."));
       setName("");
       setEmail("");
       setMessage("");
       setEmailError(null);
     } catch (err: any) {
-      setError(err?.message || "Something went wrong. Please try again.");
+      setError(err?.message || t("Something went wrong. Please try again."));
     } finally {
       setSubmitting(false);
     }
@@ -73,10 +75,10 @@ const Contact = () => {
               "
             >
               <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl lg:text-2xl xl:text-3xl">
-                Contact ASHETEN INVESTMENT
+                {t("Contact ASHETEN INVESTMENT")}
               </h2>
               <p className="mb-12 text-base font-medium text-[#cfd8dc]">
-                Ready to discuss your business needs? Get in touch with our team for professional consultation and service inquiries.
+                {t("Ready to discuss your business needs? Get in touch with our team for professional consultation and service inquiries.")}
               </p>
               <form onSubmit={onSubmit} noValidate>
                 <div className="-mx-4 flex flex-wrap">
@@ -86,7 +88,7 @@ const Contact = () => {
                         htmlFor="name"
                         className="mb-3 block text-sm font-medium text-white"
                       >
-                        Your Name
+                        {t("Your Name")}
                       </label>
                       <input
                         type="text"
@@ -95,8 +97,9 @@ const Contact = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
-                        placeholder="Enter your name"
+                        placeholder={t("Enter your name")}
                         className="border-stroke w-full rounded-xs border border-transparent bg-[#0f3b3e] px-6 py-3 text-base text-white placeholder:text-white/60 outline-hidden focus:border-[#d4af37]"
+                        suppressHydrationWarning
                       />
                     </div>
                   </div>
@@ -106,7 +109,7 @@ const Contact = () => {
                         htmlFor="email"
                         className="mb-3 block text-sm font-medium text-white"
                       >
-                        Your Email
+                        {t("Your Email")}
                       </label>
                       <input
                         type="email"
@@ -116,14 +119,15 @@ const Contact = () => {
                         onChange={handleEmailChange}
                         onBlur={(e) => {
                           if (e.target.value && !validateEmail(e.target.value)) {
-                            setEmailError("Please enter a valid email address");
+                            setEmailError(t("Please enter a valid email address"));
                           }
                         }}
                         required
-                        placeholder="Enter your email"
+                        placeholder={t("Enter your email")}
                         className={`border-stroke w-full rounded-xs border border-transparent bg-[#0f3b3e] px-6 py-3 text-base text-white placeholder:text-white/60 outline-hidden focus:border-[#d4af37] ${
                           emailError ? "border-red-500" : ""
                         }`}
+                        suppressHydrationWarning
                       />
                       {emailError && (
                         <p className="mt-2 text-sm text-red-400">{emailError}</p>
@@ -136,7 +140,7 @@ const Contact = () => {
                         htmlFor="message"
                         className="mb-3 block text-sm font-medium text-white"
                       >
-                        Your Message
+                        {t("Your Message")}
                       </label>
                       <textarea
                         id="message"
@@ -145,8 +149,9 @@ const Contact = () => {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         required
-                        placeholder="Enter your Message"
+                        placeholder={t("Enter your Message")}
                         className="border-stroke w-full resize-none rounded-xs border border-transparent bg-[#0f3b3e] px-6 py-3 text-base text-white placeholder:text-white/60 outline-hidden focus:border-[#d4af37]"
+                        suppressHydrationWarning
                       ></textarea>
                     </div>
                   </div>
@@ -165,8 +170,8 @@ const Contact = () => {
                     </div>
                   )}
                   <div className="w-full px-4">
-                    <button disabled={submitting} className="rounded-xs bg-[#d4af37] px-9 py-4 text-base font-medium text-black shadow-submit duration-300 hover:bg-[#c7a330] disabled:opacity-70 disabled:cursor-not-allowed">
-                      {submitting ? "Sending..." : "Send Message"}
+                    <button disabled={submitting} className="rounded-xs bg-[#d4af37] px-9 py-4 text-base font-medium text-black shadow-submit duration-300 hover:bg-[#c7a330] disabled:opacity-70 disabled:cursor-not-allowed" suppressHydrationWarning>
+                      {submitting ? t("Sending") : t("Send Message")}
                     </button>
                   </div>
                 </div>

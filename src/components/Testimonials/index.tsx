@@ -1,6 +1,8 @@
+"use client";
 import { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const testimonialData: Testimonial[] = [
   {
@@ -33,12 +35,13 @@ const testimonialData: Testimonial[] = [
 ];
 
 const Testimonials = () => {
+  const { t } = useLanguage();
   return (
     <section className="relative z-10 py-16 md:py-20 lg:py-28 bg-[#0f3b3e] text-white">
       <div className="container">
         <SectionTitle
-          title="What Our Clients Say"
-          paragraph="Hear from our satisfied clients who have experienced the excellence of ASHETEN INVESTMENT ONE MEMBER PLC across various business sectors."
+          title={t("What Our Clients Say")}
+          paragraph={t("Testimonials_Paragraph")}
           center
         />
 

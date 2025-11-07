@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
   return (
     <>
       <footer className="relative z-10 bg-[#0f3b3e] text-white pt-16 md:pt-20 lg:pt-24">
@@ -16,7 +18,7 @@ const Footer = () => {
                   </span>
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-[#cfd8dc]">
-                  ASHETEN INVESTMENT ONE MEMBER PLC is a diversified business entity based in Addis Ababa, Ethiopia, providing comprehensive solutions across multiple sectors including Tour & Travel, Import/Export, Wholesale/Retail Trade, Repair Services, and Hotel & Restaurant services.
+                  {t("Footer_About")}
                 </p>
                 <div className="flex items-center">
                   <a
@@ -100,7 +102,7 @@ const Footer = () => {
             <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
               <div className="mb-12 lg:mb-16">
                 <h2 className="mb-10 text-xl font-bold text-white">
-                  Our Services
+                  {t("Our Services")}
                 </h2>
                 <ul>
                   <li>
@@ -108,7 +110,7 @@ const Footer = () => {
                       href="#services"
                       className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
                     >
-                      Tour & Travel
+                      {t("Tour & Travel")}
                     </Link>
                   </li>
                   <li>
@@ -116,7 +118,7 @@ const Footer = () => {
                       href="#services"
                       className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
                     >
-                      Import & Export
+                      {t("Import & Export")}
                     </Link>
                   </li>
                   <li>
@@ -124,7 +126,7 @@ const Footer = () => {
                       href="#services"
                       className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
                     >
-                      Wholesale & Retail
+                      {t("Wholesale & Retail")}
                     </Link>
                   </li>
                 </ul>
@@ -134,15 +136,15 @@ const Footer = () => {
             <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
               <div className="mb-12 lg:mb-16">
                 <h2 className="mb-10 text-xl font-bold text-white">
-                  Company Info
+                  {t("Company Info")}
                 </h2>
                 <ul>
                   <li>
                     <Link
-                      href="/about"
+                      href="/#about"
                       className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
                     >
-                      About Us
+                      {t("About Us")}
                     </Link>
                   </li>
                   <li>
@@ -150,7 +152,7 @@ const Footer = () => {
                       href="#contact"
                       className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
                     >
-                      Contact Us
+                      {t("Contact Us")}
                     </Link>
                   </li>
                   <li>
@@ -158,7 +160,7 @@ const Footer = () => {
                       href="#services"
                       className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
                     >
-                      Our Services
+                      {t("Our Services")}
                     </Link>
                   </li>
                 </ul>
@@ -168,22 +170,22 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
               <div className="mb-12 lg:mb-16">
                 <h2 className="mb-10 text-xl font-bold text-white">
-                  Contact Info
+                  {t("Contact Info")}
                 </h2>
                 <ul>
                   <li>
                     <span className="mb-4 inline-block text-base text-[#cfd8dc]">
-                      Addis Ababa, Ethiopia
+                      {t("Addis Ababa, Ethiopia")}
                     </span>
                   </li>
                   <li>
                     <span className="mb-4 inline-block text-base text-[#cfd8dc]">
-                      Email: info@asheteninvestment.com
+                      {t("Email")}: info@asheteninvestment.com
                     </span>
                   </li>
                   <li>
                     <span className="mb-4 inline-block text-base text-[#cfd8dc]">
-                      Phone: +251 XXX XXX XXX
+                      {t("Phone")}: +251 XXX XXX XXX
                     </span>
                   </li>
                 </ul>
@@ -194,7 +196,7 @@ const Footer = () => {
           <div className="h-px w-full bg-linear-to-r from-transparent via-white/30 to-transparent"></div>
           <div className="py-8">
             <p className="text-center text-base text-[#cfd8dc]">
-              © 2025 ASHETEN INVESTMENT ONE MEMBER PLC. All rights reserved.
+              2025 ASHETEN INVESTMENT ONE MEMBER PLC. {t("All rights reserved.")}
             </p>
           </div>
         </div>
@@ -221,7 +223,7 @@ const Footer = () => {
                 cx="49.5"
                 cy="49.5"
                 r="49.5"
-                fill="#4A6CF7"
+                fill="#d4af37"
               />
             </mask>
             <g mask="url(#mask0_94:899)">
@@ -327,8 +329,8 @@ const Footer = () => {
                 y2="59.8878"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0.62" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#d4af37" stopOpacity="0.62" />
+                <stop offset="1" stopColor="#d4af37" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_94:889"
@@ -338,8 +340,8 @@ const Footer = () => {
                 y2="20.668"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.51" />
+                <stop stopColor="#d4af37" stopOpacity="0" />
+                <stop offset="1" stopColor="#d4af37" stopOpacity="0.51" />
               </linearGradient>
               <linearGradient
                 id="paint2_linear_94:889"
@@ -349,8 +351,8 @@ const Footer = () => {
                 y2="25.1062"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0.62" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#d4af37" stopOpacity="0.62" />
+                <stop offset="1" stopColor="#d4af37" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="paint3_linear_94:889"
@@ -360,8 +362,8 @@ const Footer = () => {
                 y2="80.6826"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.51" />
+                <stop stopColor="#d4af37" stopOpacity="0" />
+                <stop offset="1" stopColor="#d4af37" stopOpacity="0.51" />
               </linearGradient>
               <linearGradient
                 id="paint4_linear_94:889"
@@ -371,8 +373,8 @@ const Footer = () => {
                 y2="58.2156"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0.62" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#d4af37" stopOpacity="0.62" />
+                <stop offset="1" stopColor="#d4af37" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="paint5_linear_94:889"
@@ -382,8 +384,8 @@ const Footer = () => {
                 y2="41.6598"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.51" />
+                <stop stopColor="#d4af37" stopOpacity="0" />
+                <stop offset="1" stopColor="#d4af37" stopOpacity="0.51" />
               </linearGradient>
             </defs>
           </svg>

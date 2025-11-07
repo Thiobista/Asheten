@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 // Theme toggler removed for single brand theme
 import menuData from "./menuData";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const Header = () => {
   // Navbar toggle
@@ -16,15 +17,22 @@ const Header = () => {
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
   const handleStickyNavbar = () => {
-    if (window.scrollY >= 80) {
-      setSticky(true);
-    } else {
-      setSticky(false);
+    if (typeof window !== "undefined") {
+      if (window.scrollY >= 80) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
     }
   };
   useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar);
-  });
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleStickyNavbar);
+      return () => {
+        window.removeEventListener("scroll", handleStickyNavbar);
+      };
+    }
+  }, []);
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -37,6 +45,7 @@ const Header = () => {
   };
 
   const usePathName = usePathname();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <>
@@ -69,6 +78,7 @@ const Header = () => {
                   id="navbarToggler"
                   aria-label="Mobile Menu"
                   className="ring-primary absolute top-1/2 right-4 block translate-y-[-50%] rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden"
+                  suppressHydrationWarning
                 >
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
@@ -106,7 +116,7 @@ const Header = () => {
                                 : "text-white/90 hover:text-[#d4af37]"
                             }`}
                           >
-                            {menuItem.title}
+                            {t(menuItem.title)}
                           </Link>
                         ) : (
                           <>
@@ -114,7 +124,7 @@ const Header = () => {
                               onClick={() => handleSubmenu(index)}
                               className="text-white/90 group-hover:text-[#d4af37] flex cursor-pointer items-center justify-between py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
                             >
-                              {menuItem.title}
+                              {t(menuItem.title)}
                               <span className="pl-3">
                                 <svg width="25" height="24" viewBox="0 0 25 24">
                                   <path
@@ -137,7 +147,7 @@ const Header = () => {
                                   key={index}
                                   className="text-white/90 hover:text-[#d4af37] block rounded-sm py-2.5 text-sm lg:px-3"
                                 >
-                                  {submenuItem.title}
+                                  {t(submenuItem.title)}
                                 </Link>
                               ))}
                             </div>
@@ -150,7 +160,35 @@ const Header = () => {
               </div>
             </div>
 
-            <div className="w-60 max-w-full px-4" />
+            <div className="w-60 max-w-full px-4">
+              <div className="flex w-full justify-end">
+                <button
+                  type="button"
+                  aria-label="Toggle language"
+                  className="flex items-center gap-2 rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm font-semibold text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-[#d4af37] transition-colors"
+                  onClick={() => setLanguage(language === "en" ? "am" : "en")}
+                  suppressHydrationWarning
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span suppressHydrationWarning>
+                    {language === "en" ? t("English") : t("Amharic")}
+                  </span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </header>

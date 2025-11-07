@@ -1,7 +1,9 @@
 "use client";
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <>{children}</>
-  );
+import { LanguageProvider } from "../contexts/LanguageContext";
+
+type Language = "en" | "am";
+
+export function Providers({ children, initialLanguage = "en" }: { children: React.ReactNode; initialLanguage?: Language }) {
+  return <LanguageProvider initialLanguage={initialLanguage}>{children}</LanguageProvider>;
 }

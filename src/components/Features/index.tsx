@@ -1,15 +1,18 @@
+"use client";
 import SectionTitle from "../Common/SectionTitle";
 import SingleFeature from "./SingleFeature";
 import featuresData from "./featuresData";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const Features = () => {
+  const { t } = useLanguage();
   return (
     <>
       <section id="services" className="py-16 md:py-20 lg:py-28 bg-[#0f3b3e] text-white">
         <div className="container">
           <SectionTitle
-            title="Our Services"
-            paragraph="ASHETEN INVESTMENT ONE MEMBER PLC offers comprehensive business solutions across multiple sectors, providing reliable and professional services to meet your diverse needs."
+            title={t("Our Services")}
+            paragraph={t("Features_Paragraph")}
             center
           />
 

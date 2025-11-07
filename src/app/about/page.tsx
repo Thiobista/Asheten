@@ -3,6 +3,7 @@ import AboutSectionTwo from "@/components/About/AboutSectionTwo";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "About Us | ASHETEN INVESTMENT ONE MEMBER PLC",
@@ -26,16 +27,7 @@ export const metadata: Metadata = {
 };
 
 const AboutPage = () => {
-  return (
-    <>
-      <Breadcrumb
-        pageName="About Us"
-        description="Discover the story behind ASHETEN INVESTMENT ONE MEMBER PLC and our commitment to delivering excellence across multiple business sectors in Ethiopia."
-      />
-      <AboutSectionOne />
-      <AboutSectionTwo />
-    </>
-  );
+  redirect("/#about");
 };
 
 export default AboutPage;
