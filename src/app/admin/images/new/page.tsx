@@ -124,7 +124,11 @@ export default function NewImagePage() {
           <input
             type="number"
             value={formData.display_order}
-            onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) })}
+            onChange={(e) => {
+              const v = e.target.value
+              setFormData({ ...formData, display_order: v === '' ? 0 : Number(v) || 0 })
+            }}
+            min={0}
             className="w-full px-4 py-2 rounded bg-[#1a5a5f] border border-[#2a6a6f] text-white focus:outline-none focus:border-[#d4af37]"
           />
         </div>
