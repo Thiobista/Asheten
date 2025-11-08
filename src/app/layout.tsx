@@ -18,12 +18,14 @@ export default async function RootLayout({
   const langCookie = cookieStore.get("lang")?.value;
   const initialLanguage = langCookie === "am" ? "am" : "en";
   return (
-    <html suppressHydrationWarning lang={initialLanguage}>
+    <html suppressHydrationWarning lang={initialLanguage} translate="no">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
-      <head />
+      <head>
+        <meta name="google" content="notranslate" />
+      </head>
 
       <body className={`bg-[#0f3b3e] text-white ${inter.className}`}>
         <Providers initialLanguage={initialLanguage}>

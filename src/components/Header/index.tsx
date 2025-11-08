@@ -66,7 +66,7 @@ const Header = () => {
                 } `}
               >
                 <span className="inline-flex items-center">
-                  <Image src="/images/logo/logo-2.png" alt="ASHETEN" width={180} height={40} />
+                  <Image src="/images/logo/logo-2.png" alt="ASHETEN" width={180} height={40} priority />
                 </span>
               </Link>
             </div>
@@ -116,7 +116,7 @@ const Header = () => {
                                 : "text-white/90 hover:text-[#d4af37]"
                             }`}
                           >
-                            {t(menuItem.title)}
+                            <span suppressHydrationWarning>{t(menuItem.title)}</span>
                           </Link>
                         ) : (
                           <>
@@ -124,7 +124,7 @@ const Header = () => {
                               onClick={() => handleSubmenu(index)}
                               className="text-white/90 group-hover:text-[#d4af37] flex cursor-pointer items-center justify-between py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
                             >
-                              {t(menuItem.title)}
+                              <span suppressHydrationWarning>{t(menuItem.title)}</span>
                               <span className="pl-3">
                                 <svg width="25" height="24" viewBox="0 0 25 24">
                                   <path
@@ -147,7 +147,7 @@ const Header = () => {
                                   key={index}
                                   className="text-white/90 hover:text-[#d4af37] block rounded-sm py-2.5 text-sm lg:px-3"
                                 >
-                                  {t(submenuItem.title)}
+                                  <span suppressHydrationWarning>{t(submenuItem.title)}</span>
                                 </Link>
                               ))}
                             </div>
