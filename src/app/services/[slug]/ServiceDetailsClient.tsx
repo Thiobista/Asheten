@@ -87,7 +87,14 @@ export default function ServiceDetailsClient({ slug }: { slug: string }) {
       "Visa assistance and documentation support",
       "Safe and reliable transportation",
     ],
-    gallery: [] as { src: string; alt: string; caption: string }[],
+    gallery: [
+      { src: "/images/tour-travel/tour-01.jpg", alt: "Burj Al Arab and Jumeirah Beach Dubai", caption: "Burj Al Arab and Jumeirah Beach, Dubai" },
+      { src: "/images/tour-travel/tour-02.jpg", alt: "Dubai skyline at dusk with Burj Khalifa", caption: "Dubai skyline at dusk with Burj Khalifa" },
+      { src: "/images/tour-travel/tour-03.jpg", alt: "Dubai city skyline with Burj Khalifa", caption: "Dubai city skyline with Burj Khalifa" },
+      { src: "/images/tour-travel/tour-04.jpg", alt: "Atlantis The Palm resort Dubai", caption: "Atlantis, The Palm resort on Palm Jumeirah, Dubai" },
+      { src: "/images/tour-travel/tour-05.jpg", alt: "Ain Dubai Ferris wheel Dubai", caption: "Ain Dubai Ferris wheel and city skyline, Dubai" },
+      { src: "/images/tour-travel/tour-06.jpg", alt: "Dubai port with cruise ships", caption: "Dubai port with cruise ships and city skyline" },
+    ] as { src: string; alt: string; caption: string }[],
     process: [
       { step: "01", title: "Consultation", description: "Share your travel preferences, budget, and interests with our travel experts." },
       { step: "02", title: "Itinerary Design", description: "We create a customized itinerary that matches your needs and expectations." },
@@ -573,8 +580,27 @@ export default function ServiceDetailsClient({ slug }: { slug: string }) {
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {tourTravelContent.gallery.map((img, idx) => (
                     <figure key={idx} className="overflow-hidden rounded-lg bg-[#124448]">
-                      <div className="relative h-48 w-full">
-                        <Image src={img.src} alt={t(img.alt)} fill className="object-cover" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
+                      <div className="relative h-48 w-full bg-[#0f3b3e]">
+                        <img 
+                          src={img.src} 
+                          alt={t(img.alt)} 
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent && !parent.querySelector('.image-placeholder')) {
+                              const placeholder = document.createElement('div');
+                              placeholder.className = 'image-placeholder flex items-center justify-center h-full text-white/50';
+                              placeholder.innerHTML = `
+                                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                              `;
+                              parent.appendChild(placeholder);
+                            }
+                          }}
+                        />
                       </div>
                       <figcaption className="p-3 text-white text-sm">{t(img.caption)}</figcaption>
                     </figure>

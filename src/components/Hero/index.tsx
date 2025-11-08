@@ -26,16 +26,16 @@ const Hero = () => {
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
-                    href="#services"
+                    href="/certificates"
                     className="rounded-xs bg-[#d4af37] px-8 py-4 text-base font-semibold text-black duration-300 ease-in-out hover:bg-[#c7a330]"
                   >
-                    {t("Our Services")}
+                    {t("Certificates")}
                   </Link>
                   <Link
-                    href="#contact"
+                    href="/achievement"
                     className="inline-block rounded-xs bg-white/10 px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg:white/20"
                   >
-                    {t("Contact Us")}
+                    {t("Achievement")}
                   </Link>
                 </div>
               </div>
