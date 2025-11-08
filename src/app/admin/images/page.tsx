@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { imageApi, Image as ImageType } from "@/lib/api"
 import Link from "next/link"
 import Image from "next/image"
+import { supabase } from "@/lib/supabase"
 
 export default function ImagesPage() {
   const [images, setImages] = useState<ImageType[]>([])
@@ -18,21 +19,49 @@ export default function ImagesPage() {
       const response = await imageApi.getAll()
       setImages(response.data)
     } catch (error) {
-      console.error("Error fetching images:", error)
+      console.error("Error fetching images:", (error as any)?.message || error)
     } finally {
       setLoading(false)
     }
   }
 
-  const handleDelete = async (id: string) => {
+  const extractStoragePath = (publicUrl: string): { bucket: string; path: string } | null => {
+    try {
+      const url = new URL(publicUrl)
+      // expected: /storage/v1/object/public/<bucket>/<path>
+      const parts = url.pathname.split("/")
+      const idx = parts.findIndex((p) => p === "public")
+      const bucket = parts[idx + 1]
+      const path = parts.slice(idx + 2).join("/")
+      if (!bucket || !path) return null
+      return { bucket, path }
+    } catch {
+      return null
+    }
+  }
+
+  const handleDelete = async (img: ImageType) => {
     if (!confirm("Are you sure you want to delete this image?")) return
 
     try {
-      await imageApi.delete(id)
-      fetchImages()
+      // Attempt to remove from storage first (best-effort)
+      if (img.image_url) {
+        const info = extractStoragePath(img.image_url)
+        if (info) {
+          const { error: storageErr } = await supabase.storage
+            .from(info.bucket)
+            .remove([info.path])
+          if (storageErr) {
+            console.warn("Failed to remove file from storage:", storageErr.message || storageErr)
+          }
+        }
+      }
+
+      await imageApi.delete(img.id)
+      await fetchImages()
     } catch (error) {
-      console.error("Error deleting image:", error)
-      alert("Failed to delete image")
+      console.error("Error deleting image:", (error as any)?.message || error)
+      alert(`Failed to delete image: ${(error as any)?.message || "Unknown error"}`)
     }
   }
 
@@ -81,7 +110,7 @@ export default function ImagesPage() {
                   Edit
                 </Link>
                 <button
-                  onClick={() => handleDelete(image.id)}
+                  onClick={() => handleDelete(image)}
                   className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm transition"
                 >
                   Delete

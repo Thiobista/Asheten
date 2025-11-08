@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { certificateApi, Certificate } from "@/lib/api"
 import Link from "next/link"
+import { supabase } from "@/lib/supabase"
 
 export default function CertificatesPage() {
   const [certificates, setCertificates] = useState<Certificate[]>([])
@@ -23,15 +24,41 @@ export default function CertificatesPage() {
     }
   }
 
-  const handleDelete = async (id: string) => {
+  const extractStoragePath = (publicUrl: string): { bucket: string; path: string } | null => {
+    try {
+      const url = new URL(publicUrl)
+      const parts = url.pathname.split("/")
+      const idx = parts.findIndex((p) => p === "public")
+      const bucket = parts[idx + 1]
+      const path = parts.slice(idx + 2).join("/")
+      if (!bucket || !path) return null
+      return { bucket, path }
+    } catch {
+      return null
+    }
+  }
+
+  const handleDelete = async (cert: Certificate) => {
     if (!confirm("Are you sure you want to delete this certificate?")) return
 
     try {
-      await certificateApi.delete(id)
-      fetchCertificates()
+      if (cert.certificate_url) {
+        const info = extractStoragePath(cert.certificate_url)
+        if (info) {
+          const { error: storageErr } = await supabase.storage
+            .from(info.bucket)
+            .remove([info.path])
+          if (storageErr) {
+            console.warn("Failed to remove file from storage:", storageErr.message || storageErr)
+          }
+        }
+      }
+
+      await certificateApi.delete(cert.id)
+      await fetchCertificates()
     } catch (error) {
-      console.error("Error deleting certificate:", error)
-      alert("Failed to delete certificate")
+      console.error("Error deleting certificate:", (error as any)?.message || error)
+      alert(`Failed to delete certificate: ${(error as any)?.message || "Unknown error"}`)
     }
   }
 
@@ -82,7 +109,7 @@ export default function CertificatesPage() {
                 Edit
               </Link>
               <button
-                onClick={() => handleDelete(certificate.id)}
+                onClick={() => handleDelete(certificate)}
                 className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm transition"
               >
                 Delete

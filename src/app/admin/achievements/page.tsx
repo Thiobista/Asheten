@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { achievementApi, Achievement } from "@/lib/api"
 import Link from "next/link"
 import NextImage from "next/image"
+import { supabase } from "@/lib/supabase"
 
 export default function AchievementsPage() {
   const [achievements, setAchievements] = useState<Achievement[]>([])
@@ -24,15 +25,41 @@ export default function AchievementsPage() {
     }
   }
 
-  const handleDelete = async (id: string) => {
+  const extractStoragePath = (publicUrl: string): { bucket: string; path: string } | null => {
+    try {
+      const url = new URL(publicUrl)
+      const parts = url.pathname.split("/")
+      const idx = parts.findIndex((p) => p === "public")
+      const bucket = parts[idx + 1]
+      const path = parts.slice(idx + 2).join("/")
+      if (!bucket || !path) return null
+      return { bucket, path }
+    } catch {
+      return null
+    }
+  }
+
+  const handleDelete = async (ach: Achievement) => {
     if (!confirm("Are you sure you want to delete this achievement?")) return
 
     try {
-      await achievementApi.delete(id)
-      fetchAchievements()
+      if (ach.image_url) {
+        const info = extractStoragePath(ach.image_url)
+        if (info) {
+          const { error: storageErr } = await supabase.storage
+            .from(info.bucket)
+            .remove([info.path])
+          if (storageErr) {
+            console.warn("Failed to remove file from storage:", storageErr.message || storageErr)
+          }
+        }
+      }
+
+      await achievementApi.delete(ach.id)
+      await fetchAchievements()
     } catch (error) {
-      console.error("Error deleting achievement:", error)
-      alert("Failed to delete achievement")
+      console.error("Error deleting achievement:", (error as any)?.message || error)
+      alert(`Failed to delete achievement: ${(error as any)?.message || "Unknown error"}`)
     }
   }
 
@@ -88,7 +115,7 @@ export default function AchievementsPage() {
                   Edit
                 </Link>
                 <button
-                  onClick={() => handleDelete(achievement.id)}
+                  onClick={() => handleDelete(achievement)}
                   className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm transition"
                 >
                   Delete
