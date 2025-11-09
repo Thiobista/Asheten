@@ -1,42 +1,39 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { certificateApi, Certificate } from "@/lib/api";
 
 const CertificatesPage = () => {
   const { t } = useLanguage();
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const certificates = [
-    {
-      id: 1,
-      title: t("Business License Certificate"),
-      description: t("Official business license from Ethiopian authorities"),
-      image: "/images/certificates/certificate-01.jpg",
-      year: "2020",
-    },
-    {
-      id: 2,
-      title: t("Tour Operator License"),
-      description: t("Licensed tour operator certification"),
-      image: "/images/certificates/certificate-02.jpg",
-      year: "2021",
-    },
-    {
-      id: 3,
-      title: t("Import Export License"),
-      description: t("International trade license certification"),
-      image: "/images/certificates/certificate-03.jpg",
-      year: "2022",
-    },
-    {
-      id: 4,
-      title: t("Quality Assurance Certificate"),
-      description: t("Quality management system certification"),
-      image: "/images/certificates/certificate-04.jpg",
-      year: "2023",
-    },
-  ];
+  useEffect(() => {
+    fetchCertificates();
+  }, []);
+
+  const fetchCertificates = async () => {
+    try {
+      const response = await certificateApi.getAll();
+      setCertificates(response.data);
+    } catch (error) {
+      console.error("Error fetching certificates:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getYearFromDate = (dateString?: string) => {
+    if (!dateString) return "";
+    try {
+      return new Date(dateString).getFullYear().toString();
+    } catch {
+      return "";
+    }
+  };
 
   return (
     <>
@@ -58,29 +55,50 @@ const CertificatesPage = () => {
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-            {certificates.map((certificate) => (
-              <div
-                key={certificate.id}
-                className="bg-[#124448] rounded-lg border border-[#124448] p-6 shadow-sm transition-all duration-300 hover:shadow-md"
-              >
-                <div className="relative h-64 w-full mb-4 overflow-hidden rounded-md">
-                  <Image
-                    src={certificate.image}
-                    alt={certificate.title}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
-                  />
-                </div>
-                <div className="text-white">
-                  <div className="mb-2 text-sm text-white/70">{certificate.year}</div>
-                  <h3 className="mb-3 text-xl font-semibold">{certificate.title}</h3>
-                  <p className="text-white/80 text-base leading-relaxed">{certificate.description}</p>
-                </div>
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <div className="w-12 h-12 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-400">Loading certificates...</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ) : certificates.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-400 text-lg">{t("No certificates available at the moment.")}</p>
+            </div>
+          ) : (
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+              {certificates.map((certificate) => (
+                <div
+                  key={certificate.id}
+                  className="bg-[#124448] rounded-lg border border-[#124448] p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+                >
+                  <div className="relative h-64 w-full mb-4 overflow-hidden rounded-md">
+                    <Image
+                      src={certificate.certificate_url}
+                      alt={certificate.title}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="text-white">
+                    {certificate.issued_date && (
+                      <div className="mb-2 text-sm text-white/70">
+                        {getYearFromDate(certificate.issued_date)}
+                        {certificate.issued_by && ` • ${certificate.issued_by}`}
+                      </div>
+                    )}
+                    <h3 className="mb-3 text-xl font-semibold">{certificate.title}</h3>
+                    {certificate.description && (
+                      <p className="text-white/80 text-base leading-relaxed">{certificate.description}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>

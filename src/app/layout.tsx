@@ -1,11 +1,9 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import ScrollToTop from "@/components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "../styles/index.css";
 import JsonLd from "@/components/SEO/JsonLd";
 import { Providers } from "./providers";
 import { cookies } from "next/headers";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,10 +53,9 @@ export default async function RootLayout({
               }
             ]}
           />
-          <Header />
-          {children}
-          <Footer />
-          <ScrollToTop />
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
         </Providers>
       </body>
     </html>

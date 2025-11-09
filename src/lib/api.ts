@@ -40,12 +40,17 @@ export interface Achievement {
 }
 
 export const imageApi = {
-  getAll: async () => {
-    const { data, error } = await supabase
+  getAll: async (category?: string) => {
+    let query = supabase
       .from('images')
       .select('*')
       .eq('is_active', true)
-      .order('display_order', { ascending: false })
+    
+    if (category) {
+      query = query.eq('category', category)
+    }
+    
+    const { data, error } = await query.order('display_order', { ascending: false })
     
     if (error) throw error
     return { data: data as Image[] }

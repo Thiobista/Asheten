@@ -1,54 +1,36 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { achievementApi, Achievement } from "@/lib/api";
 
 const AchievementPage = () => {
   const { t } = useLanguage();
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const achievements = [
-    {
-      id: 1,
-      title: t("5+ Years of Excellence"),
-      description: t("Over 5 years of successful operations serving clients across Ethiopia"),
-      icon: (
-        <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-        </svg>
-      ),
-    },
-    {
-      id: 2,
-      title: t("1000+ Satisfied Clients"),
-      description: t("Trusted by over 1000 clients across various business sectors"),
-      icon: (
-        <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
-    },
-    {
-      id: 3,
-      title: t("Multi-Sector Expertise"),
-      description: t("Successfully operating across 5+ business sectors with proven track record"),
-      icon: (
-        <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
-      ),
-    },
-    {
-      id: 4,
-      title: t("Award-Winning Service"),
-      description: t("Recognized for excellence in business services and customer satisfaction"),
-      icon: (
-        <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-        </svg>
-      ),
-    },
-  ];
+  useEffect(() => {
+    fetchAchievements();
+  }, []);
+
+  const fetchAchievements = async () => {
+    try {
+      const response = await achievementApi.getAll();
+      setAchievements(response.data);
+    } catch (error) {
+      console.error("Error fetching achievements:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const defaultIcon = (
+    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+    </svg>
+  );
 
   return (
     <>
@@ -70,20 +52,57 @@ const AchievementPage = () => {
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-            {achievements.map((achievement) => (
-              <div
-                key={achievement.id}
-                className="bg-[#124448] rounded-lg border border-[#124448] p-8 shadow-sm transition-all duration-300 hover:shadow-md"
-              >
-                <div className="bg-white/10 text-white mb-6 inline-flex h-16 w-16 items-center justify-center rounded-md">
-                  {achievement.icon}
-                </div>
-                <h3 className="mb-3 text-xl font-semibold text-white">{achievement.title}</h3>
-                <p className="text-white/80 text-base leading-relaxed">{achievement.description}</p>
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <div className="w-12 h-12 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-400">Loading achievements...</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ) : achievements.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-400 text-lg">{t("No achievements available at the moment.")}</p>
+            </div>
+          ) : (
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+              {achievements.map((achievement) => (
+                <div
+                  key={achievement.id}
+                  className="bg-[#124448] rounded-lg border border-[#124448] p-8 shadow-sm transition-all duration-300 hover:shadow-md"
+                >
+                  {achievement.image_url ? (
+                    <div className="relative h-48 w-full mb-6 overflow-hidden rounded-md">
+                      <Image
+                        src={achievement.image_url}
+                        alt={achievement.title}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
+                        unoptimized
+                      />
+                    </div>
+                  ) : (
+                    <div className="bg-white/10 text-white mb-6 inline-flex h-16 w-16 items-center justify-center rounded-md">
+                      {defaultIcon}
+                    </div>
+                  )}
+                  <h3 className="mb-3 text-xl font-semibold text-white">{achievement.title}</h3>
+                  {achievement.description && (
+                    <p className="text-white/80 text-base leading-relaxed">{achievement.description}</p>
+                  )}
+                  {achievement.achievement_date && (
+                    <p className="mt-3 text-sm text-white/60">
+                      {new Date(achievement.achievement_date).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>
