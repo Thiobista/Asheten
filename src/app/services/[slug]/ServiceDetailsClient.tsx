@@ -10,7 +10,6 @@ import { imageApi, Image as ImageType } from "@/lib/api";
 export default function ServiceDetailsClient({ slug }: { slug: string }) {
   const service = featuresData.find((f) => f.slug === slug);
   const { t } = useLanguage();
-  if (!service) return notFound();
 
   const isTourTravel = slug === "tour-and-travel-services";
   const [tourTravelImages, setTourTravelImages] = useState<ImageType[]>([]);
@@ -63,6 +62,8 @@ export default function ServiceDetailsClient({ slug }: { slug: string }) {
   const isRepairServices = slug === "repair-services";
   const isHotelRestaurant = slug === "hotel-and-restaurant-services";
   const isBusinessSolutions = slug === "business-solutions";
+
+  if (!service) return notFound();
 
   // The following content blocks mirror the server file, but we will translate at render-time via t()
   const tourTravelContent = {

@@ -12,15 +12,14 @@ export default function AdminLogin() {
   const router = useRouter()
 
   useEffect(() => {
-    checkSession()
-  }, [])
-
-  const checkSession = async () => {
-    const { data: { session } } = await supabase.auth.getSession()
-    if (session) {
-      router.push('/admin')
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        router.push('/admin')
+      }
     }
-  }
+    checkSession()
+  }, [router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -91,4 +90,3 @@ export default function AdminLogin() {
     </div>
   )
 }
-

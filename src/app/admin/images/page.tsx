@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { imageApi, Image as ImageType } from "@/lib/api"
 import Link from "next/link"
 import Image from "next/image"
@@ -10,11 +10,7 @@ export default function ImagesPage() {
   const [images, setImages] = useState<ImageType[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchImages()
-  }, [])
-
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     try {
       const response = await imageApi.getAll()
       setImages(response.data)
@@ -23,7 +19,11 @@ export default function ImagesPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    fetchImages()
+  }, [fetchImages])
 
   const extractStoragePath = (publicUrl: string): { bucket: string; path: string } | null => {
     try {
