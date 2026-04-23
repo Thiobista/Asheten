@@ -7,17 +7,17 @@ const Footer = () => {
   const { t } = useLanguage();
   return (
     <>
-      <footer className="relative z-10 bg-[#0f3b3e] text-white pt-16 md:pt-20 lg:pt-24">
+      <footer className="relative z-10 bg-dark text-white pt-16 md:pt-20 lg:pt-24">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
               <div className="mb-12 max-w-[360px] lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
-                  <span className="text-2xl font-bold text-[#d4af37]">
+                  <span className="text-2xl font-bold text-primary">
                     ASHETEN INVESTMENT
                   </span>
                 </Link>
-                <p className="mb-9 text-base leading-relaxed text-[#cfd8dc]">
+                <p className="mb-9 text-base leading-relaxed text-body-color">
                   {t("Footer_About")}
                 </p>
                 <div className="flex items-center">
@@ -26,7 +26,7 @@ const Footer = () => {
                     aria-label="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mr-6 text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                    className="mr-6 text-body-color duration-300 hover:text-primary"
                   >
                     <svg
                       width="18"
@@ -46,7 +46,7 @@ const Footer = () => {
                     aria-label="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mr-6 text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                    className="mr-6 text-body-color duration-300 hover:text-primary"
                   >
                     <svg
                       width="18"
@@ -68,7 +68,7 @@ const Footer = () => {
                     aria-label="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mr-6 text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                    className="mr-6 text-body-color duration-300 hover:text-primary"
                   >
                     <svg
                       width="18"
@@ -84,7 +84,7 @@ const Footer = () => {
                     aria-label="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                    className="text-body-color duration-300 hover:text-primary"
                   >
                     <svg
                       width="17"
@@ -108,7 +108,7 @@ const Footer = () => {
                   <li>
                     <Link
                       href="#services"
-                      className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary"
                     >
                       {t("Tour & Travel")}
                     </Link>
@@ -116,7 +116,7 @@ const Footer = () => {
                   <li>
                     <Link
                       href="#services"
-                      className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary"
                     >
                       {t("Import & Export")}
                     </Link>
@@ -124,7 +124,7 @@ const Footer = () => {
                   <li>
                     <Link
                       href="#services"
-                      className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary"
                     >
                       {t("Wholesale & Retail")}
                     </Link>
@@ -142,7 +142,7 @@ const Footer = () => {
                   <li>
                     <Link
                       href="/#about"
-                      className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary"
                     >
                       {t("About Us")}
                     </Link>
@@ -150,7 +150,7 @@ const Footer = () => {
                   <li>
                     <Link
                       href="#contact"
-                      className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary"
                     >
                       {t("Contact Us")}
                     </Link>
@@ -158,7 +158,7 @@ const Footer = () => {
                   <li>
                     <Link
                       href="#services"
-                      className="mb-4 inline-block text-base text-[#cfd8dc] duration-300 hover:text-[#d4af37]"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary"
                     >
                       {t("Our Services")}
                     </Link>
@@ -174,17 +174,17 @@ const Footer = () => {
                 </h2>
                 <ul>
                   <li>
-                    <span className="mb-4 inline-block text-base text-[#cfd8dc]">
+                    <span className="mb-4 inline-block text-base text-body-color">
                       {t("Addis Ababa, Ethiopia")}
                     </span>
                   </li>
                   <li>
-                    <span className="mb-4 inline-block text-base text-[#cfd8dc]">
+                    <span className="mb-4 inline-block text-base text-body-color">
                       {t("Email")}: info@asheteninvestment.com
                     </span>
                   </li>
                   <li>
-                    <span className="mb-4 inline-block text-base text-[#cfd8dc]">
+                    <span className="mb-4 inline-block text-base text-body-color">
                       {t("Phone")}: +251 XXX XXX XXX
                     </span>
                   </li>

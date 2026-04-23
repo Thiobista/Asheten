@@ -112,8 +112,8 @@ const Header = () => {
                             href={menuItem.path}
                             className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
                               usePathName === menuItem.path
-                                ? "text-[#d4af37]"
-                                : "text-white/90 hover:text-[#d4af37]"
+                                ? "text-primary"
+                                : "text-white/90 hover:text-primary"
                             }`}
                           >
                             <span suppressHydrationWarning>{t(menuItem.title)}</span>
@@ -122,7 +122,7 @@ const Header = () => {
                           <>
                             <p
                               onClick={() => handleSubmenu(index)}
-                              className="text-white/90 group-hover:text-[#d4af37] flex cursor-pointer items-center justify-between py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
+                              className="text-white/90 group-hover:text-primary flex cursor-pointer items-center justify-between py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
                             >
                               <span suppressHydrationWarning>{t(menuItem.title)}</span>
                               <span className="pl-3">
@@ -137,7 +137,7 @@ const Header = () => {
                               </span>
                             </p>
                             <div
-                              className={`submenu relative top-full left-0 rounded-sm bg-[#124448] text-white transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${
+                               className={`submenu relative top-full left-0 rounded-sm bg-dark text-white transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${
                                 openIndex === index ? "block" : "hidden"
                               }`}
                             >
@@ -145,7 +145,7 @@ const Header = () => {
                                 <Link
                                   href={submenuItem.path}
                                   key={index}
-                                  className="text-white/90 hover:text-[#d4af37] block rounded-sm py-2.5 text-sm lg:px-3"
+                                  className="text-white/90 hover:text-primary block rounded-sm py-2.5 text-sm lg:px-3"
                                 >
                                   <span suppressHydrationWarning>{t(submenuItem.title)}</span>
                                 </Link>

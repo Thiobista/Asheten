@@ -9,7 +9,7 @@ const starIcon = (
 );
 
 const SingleTestimonial = ({ testimonial }: { testimonial: Testimonial }) => {
-  const { star, name, image, content, designation } = testimonial;
+  const { star, name, image, content } = testimonial;
   const { t } = useLanguage();
 
   let ratingIcons = [];
@@ -23,7 +23,7 @@ const SingleTestimonial = ({ testimonial }: { testimonial: Testimonial }) => {
 
   return (
     <div className="w-full h-full">
-      <div className="shadow-two hover:shadow-one rounded-xs bg-[#124448] text-white p-8 duration-300 lg:px-5 xl:px-8 h-full flex flex-col">
+      <div className="shadow-two hover:shadow-one rounded-xs bg-dark text-white p-8 duration-300 lg:px-5 xl:px-8 h-full flex flex-col">
         <div className="mb-5 flex items-center space-x-1">{ratingIcons}</div>
         <p className="border-white/10 text-white mb-8 border-b pb-8 text-base leading-relaxed flex-grow">
           &ldquo;{t(content)}
@@ -36,7 +36,6 @@ const SingleTestimonial = ({ testimonial }: { testimonial: Testimonial }) => {
             <h3 className="text-white mb-1 text-lg font-semibold lg:text-base xl:text-lg">
               {name}
             </h3>
-            <p className="text-white/70 text-sm">{t(designation)}</p>
           </div>
         </div>
       </div>

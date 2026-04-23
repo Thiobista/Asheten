@@ -1,9 +1,8 @@
 import { Inter } from "next/font/google";
 import "../styles/index.css";
-import JsonLd from "@/components/SEO/JsonLd";
 import { Providers } from "./providers";
 import { cookies } from "next/headers";
-import LayoutWrapper from "@/components/LayoutWrapper";
+import DevServiceWorkerCleanup from "@/components/DevServiceWorkerCleanup";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,37 +24,10 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
       </head>
 
-      <body className={`bg-[#0f3b3e] text-white ${inter.className}`}>
+      <body className={`bg-white text-slate-900 antialiased dark:bg-[#050816] dark:text-slate-100 ${inter.className}`}>
+        <DevServiceWorkerCleanup />
         <Providers initialLanguage={initialLanguage}>
-          <JsonLd
-            data={[
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: "ASHETEN INVESTMENT ONE MEMBER PLC",
-                url: "https://asheteninvestment.com/",
-                logo: "https://asheteninvestment.com/images/logo/logo-2.png",
-                sameAs: [
-                  "https://www.facebook.com/",
-                  "https://www.linkedin.com/"
-                ]
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "ASHETEN INVESTMENT",
-                url: "https://asheteninvestment.com/",
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: "https://asheteninvestment.com/?q={search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
-              }
-            ]}
-          />
-          <LayoutWrapper>
-            {children}
-          </LayoutWrapper>
+          {children}
         </Providers>
       </body>
     </html>

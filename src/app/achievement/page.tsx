@@ -55,7 +55,7 @@ const AchievementPage = () => {
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <div className="text-center">
-                <div className="w-12 h-12 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                 <p className="text-gray-400">Loading achievements...</p>
               </div>
             </div>
@@ -68,7 +68,7 @@ const AchievementPage = () => {
               {achievements.map((achievement) => (
                 <div
                   key={achievement.id}
-                  className="bg-[#124448] rounded-lg border border-[#124448] p-8 shadow-sm transition-all duration-300 hover:shadow-md"
+                  className="bg-dark rounded-lg border border-dark p-8 shadow-sm transition-all duration-300 hover:shadow-md"
                 >
                   {achievement.image_url ? (
                     <div className="relative h-48 w-full mb-6 overflow-hidden rounded-md">

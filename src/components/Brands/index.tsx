@@ -7,14 +7,14 @@ import { useLanguage } from "../../contexts/LanguageContext";
 const Brands = () => {
   const { t } = useLanguage();
   return (
-    <section className="pt-16 bg-[#0f3b3e] text-white">
+    <section className="pt-16 bg-dark text-white">
       <div className="container">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="flex flex-wrap items-center justify-center rounded-xs bg-[#124448] px-8 py-8 sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
+            <div className="flex flex-wrap items-center justify-center rounded-xs bg-bg-color-dark px-8 py-8 sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
               <div className="w-full text-center mb-6">
                 <h3 className="text-xl font-semibold text-white mb-2">{t("Our Partners")}</h3>
-                <p className="text-[#cfd8dc]">{t("Partners_Paragraph")}</p>
+                <p className="text-body-color">{t("Partners_Paragraph")}</p>
               </div>
               {brandsData.map((brand) => (
                 <SingleBrand key={brand.id} brand={brand} />

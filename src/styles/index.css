@@ -17,14 +17,14 @@ layer(base);
   --color-current: currentColor;
   --color-transparent: transparent;
   --color-white: #ffffff;
-  --color-black: #ffffff;
-  --color-dark: #0f2f31; /* deep teal shadows */
-  --color-primary: #d4af37; /* gold */
-  --color-yellow: #d4af37;
-  --color-bg-color-dark: #171c28;
+  --color-black: #000000;
+  --color-dark: #1e293b; /* slate-800 for better contrast */
+  --color-primary: #3b82f6; /* bright blue for visibility */
+  --color-yellow: #3b82f6;
+  --color-bg-color-dark: #0f172a; /* slate-900 dark background */
 
-  --color-body-color: #cfd8dc; /* light slate for readability */
-  --color-body-color-dark: #cfd8dc;
+  --color-body-color: #e2e8f0; /* slate-200 light text */
+  --color-body-color-dark: #e2e8f0;
 
   --color-stroke-stroke: #e3e8ef;
   --color-stroke-dark: #353943;
@@ -123,6 +123,10 @@ layer(base);
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: "Inter", sans-serif;
   }

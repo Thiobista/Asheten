@@ -1,47 +1,27 @@
-import AboutSectionOne from "@/components/About/AboutSectionOne";
-import AboutSectionTwo from "@/components/About/AboutSectionTwo";
-import Brands from "@/components/Brands";
-import ScrollUp from "@/components/Common/ScrollUp";
-import Contact from "@/components/Contact";
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
-import Testimonials from "@/components/Testimonials";
+import EnquPortfolioPage from "@/components/enqu/EnquPortfolioPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ASHETEN INVESTMENT ONE MEMBER PLC - Leading Business Solutions in Ethiopia",
-  description: "ASHETEN INVESTMENT ONE MEMBER PLC offers comprehensive business services including Tour & Travel, Import/Export, Wholesale/Retail Trade, Repair Services, and Hotel & Restaurant services in Addis Ababa, Ethiopia.",
-  alternates: { canonical: "https://asheteninvestment.com/" },
+  title: "ENQU | Elevating Software to Art",
+  description: "ENQU designs and builds modern digital products for web and mobile.",
+  alternates: { canonical: "https://enqu.dev/" },
   openGraph: {
-    title: "ASHETEN INVESTMENT ONE MEMBER PLC",
-    description: "Comprehensive business services in Ethiopia.",
-    url: "https://asheteninvestment.com/",
-    siteName: "ASHETEN INVESTMENT",
-    images: [
-      { url: "/images/logo/logo-2.png", width: 600, height: 315, alt: "ASHETEN INVESTMENT" },
-    ],
+    title: "ENQU",
+    description: "Modern software delivery across web, mobile, and backend systems.",
+    url: "https://enqu.dev/",
+    siteName: "ENQU",
+    images: [{ url: "/images/logo/logo.png", width: 512, height: 512, alt: "ENQU" }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ASHETEN INVESTMENT ONE MEMBER PLC",
-    description: "Comprehensive business services in Ethiopia.",
-    images: ["/images/logo/logo-2.png"],
+    title: "ENQU",
+    description: "Elevating software to art.",
+    images: ["/images/logo/logo.png"],
   },
 };
 
 export default function Home() {
-  return (
-    <>
-      <ScrollUp />
-      <Hero />
-      <Features />
-      <Brands />
-      <AboutSectionOne />
-      <AboutSectionTwo />
-      <Testimonials />
-      <Contact />
-    </>
-  );
+  return <EnquPortfolioPage />;
 }

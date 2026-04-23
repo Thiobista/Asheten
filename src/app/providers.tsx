@@ -1,9 +1,14 @@
 "use client";
 
 import { LanguageProvider } from "../contexts/LanguageContext";
+import { ThemeProvider } from "next-themes";
 
 type Language = "en" | "am";
 
 export function Providers({ children, initialLanguage = "en" }: { children: React.ReactNode; initialLanguage?: Language }) {
-  return <LanguageProvider initialLanguage={initialLanguage}>{children}</LanguageProvider>;
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <LanguageProvider initialLanguage={initialLanguage}>{children}</LanguageProvider>
+    </ThemeProvider>
+  );
 }
