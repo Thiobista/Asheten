@@ -163,8 +163,8 @@ export default function EnquPortfolioPage() {
             ))}
           </nav>
           <div className="flex items-center gap-4">
-            <a href="mailto:hello@enqu.dev" className="text-sm font-semibold text-[#fff0c4] hover:text-white">
-              hello@enqu.dev
+            <a href="mailto:enkukenqu@gmail.com" className="text-sm font-semibold text-[#fff0c4] hover:text-white">
+              enkukenqu@gmail.com
             </a>
           </div>
         </div>
@@ -180,7 +180,7 @@ export default function EnquPortfolioPage() {
           </h1>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="mailto:hello@enqu.dev"
+              href="mailto:enkukenqu@gmail.com"
               className="rounded-full bg-gradient-to-r from-[#a77a14] via-[#d4af37] to-[#f3d77a] px-6 py-3 text-sm font-semibold text-black transition hover:-translate-y-0.5"
             >
               Email Us
@@ -411,10 +411,10 @@ export default function EnquPortfolioPage() {
             From concept to launch, ENQU helps you move faster with software built for real outcomes.
           </p>
           <a
-            href="mailto:hello@enqu.dev"
+            href="mailto:enkukenqu@gmail.com"
             className="mt-6 inline-flex rounded-full bg-gradient-to-r from-[#a77a14] via-[#d4af37] to-[#f3d77a] px-5 py-3 text-sm font-semibold text-black transition hover:opacity-90"
           >
-            hello@enqu.dev
+            enkukenqu@gmail.com
           </a>
         </motion.div>
       </section>
