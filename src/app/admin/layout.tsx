@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import Link from "next/link"
@@ -16,6 +16,22 @@ export default function AdminLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
+
+  const checkUser = useCallback(async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        setUser(session.user)
+      } else {
+        router.push('/admin/login')
+      }
+    } catch (error) {
+      console.error('Error checking user:', error)
+      router.push('/admin/login')
+    } finally {
+      setLoading(false)
+    }
+  }, [router])
 
   useEffect(() => {
     // Do not run auth guard on the login page itself
@@ -36,23 +52,7 @@ export default function AdminLayout({
     })
 
     return () => subscription.unsubscribe()
-  }, [router, pathname])
-
-  const checkUser = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session) {
-        setUser(session.user)
-      } else {
-        router.push('/admin/login')
-      }
-    } catch (error) {
-      console.error('Error checking user:', error)
-      router.push('/admin/login')
-    } finally {
-      setLoading(false)
-    }
-  }
+  }, [router, pathname, checkUser])
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()

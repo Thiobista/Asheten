@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { imageApi } from "@/lib/api"
 import { supabase } from "@/lib/supabase"
+import Image from "next/image"
 
 export default function NewImagePage() {
   const router = useRouter()
@@ -104,7 +105,7 @@ export default function NewImagePage() {
           {uploading && <p className="text-sm text-gray-400 mt-2">Uploading...</p>}
           {formData.image_url && (
             <div className="mt-4">
-              <img src={formData.image_url} alt="Preview" className="max-w-xs rounded" />
+              <Image src={formData.image_url} alt="Preview" className="max-w-xs rounded" width={320} height={240} />
             </div>
           )}
         </div>

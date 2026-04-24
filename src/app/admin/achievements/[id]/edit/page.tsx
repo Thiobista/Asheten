@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { achievementApi, Achievement } from "@/lib/api"
 import { supabase } from "@/lib/supabase"
+import Image from "next/image"
 
 export default function EditAchievementPage() {
   const router = useRouter()
@@ -161,7 +162,7 @@ export default function EditAchievementPage() {
           {uploading && <p className="text-sm text-gray-400 mt-2">Uploading...</p>}
           {formData.image_url && (
             <div className="mt-4">
-              <img src={formData.image_url} alt="Preview" className="max-w-xs rounded" />
+              <Image src={formData.image_url} alt="Preview" className="max-w-xs rounded" width={320} height={240} />
             </div>
           )}
         </div>
