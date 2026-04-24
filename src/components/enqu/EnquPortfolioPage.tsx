@@ -115,12 +115,12 @@ const testimonials = [
   {
     quote:
       "They acted like a true product partner, not just a vendor. We launched faster and our team now ships with more confidence.",
-    name: "Michael Hart",
+    name: "Michael Alemu",
   },
   {
     quote:
       "The AI automation they implemented removed repetitive tasks across departments and improved reliability at scale.",
-    name: "Ruth Chen",
+    name: "Ruth Mintesnot",
   },
 ];
 
