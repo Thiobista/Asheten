@@ -7,7 +7,7 @@ type Language = "en" | "am";
 
 export function Providers({ children, initialLanguage = "en" }: { children: React.ReactNode; initialLanguage?: Language }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <LanguageProvider initialLanguage={initialLanguage}>{children}</LanguageProvider>
     </ThemeProvider>
   );
